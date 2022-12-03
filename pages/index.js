@@ -8,7 +8,7 @@ export default function HomePage() {
       WebViewer(
         {
           path: '/webviewer/lib',
-          initialDoc: "/files/PDFTRON_about.pdf",
+          initialDoc: '/files/PDFTRON_about.pdf',
         },
         viewer.current
       ).then((instance) => {
