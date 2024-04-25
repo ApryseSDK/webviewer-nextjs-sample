@@ -2,22 +2,33 @@ import { useEffect, useRef } from 'react';
 
 export default function HomePage() {
   const viewer = useRef(null);
+  const beenInitialized = useRef(false);
 
   useEffect(() => {
-    import('@pdftron/webviewer').then(() => {
-      WebViewer(
-        {
-          path: '/webviewer/lib',
-          initialDoc: '/files/PDFTRON_about.pdf',
-          licenseKey: 'your_license_key'  // sign up to get a free trial key at https://dev.apryse.com
-        },
-        viewer.current
-      ).then((instance) => {
-        const { docViewer } = instance;
-        // you can now call WebViewer APIs here...
-      });
-    });
-  }, []);
+    const loadWebViewer = async () => {
+      if (!beenInitialized.current) {
+        try {
+          beenInitialized.current = true;
+          const WebViewer = (await import('@pdftron/webviewer')).default;
+          const instance = await WebViewer(
+            {
+              path: '/webviewer/lib',
+              initialDoc: '/files/PDFTRON_about.pdf',
+              licenseKey: 'your_license_key'
+            },
+            viewer.current
+          );
+
+          const { docViewer } = instance;
+          // you can now call WebViewer APIs here...
+        } catch (error) {
+          console.error("Error loading WebViewer", error);
+        }
+      }
+    };
+
+    loadWebViewer();
+  }, [beenInitialized]);
 
   return (
     <div className='MyComponent'>
