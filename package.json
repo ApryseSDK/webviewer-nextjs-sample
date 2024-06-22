@@ -11,13 +11,13 @@
   },
   "dependencies": {
     "@pdftron/webviewer": "^8.1.0",
-    "next": "11.1.2",
+    "next": "^14.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "fs-extra": "^7.0.1",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "fs-extra": "^7.0.1"
   }
 }
